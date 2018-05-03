@@ -1,0 +1,1 @@
+# Morpher.WebService.V3.Adapter
