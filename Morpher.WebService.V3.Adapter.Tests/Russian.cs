@@ -31,9 +31,10 @@ namespace Morpher.WebService.V3.Adaptor.Test
             Assert.AreEqual("помидорами", parsedResult.Plural.Instrumental);
             Assert.AreEqual("помидорах", parsedResult.Plural.Prepositional);
 
-            Assert.IsNull(parsedResult.Gender);            
-            Assert.IsFalse(parsedResult.IsAnimate);
-            Assert.IsNull(parsedResult.Paucal);
+            Assert.IsNull(parsedResult.Gender);
+            
+            Assert.Throws<NotImplementedException>(() => { var fail = parsedResult.IsAnimate; } );
+            Assert.Throws<NotImplementedException>(() => { var fail = parsedResult.Paucal; });            
         }
     }
 }

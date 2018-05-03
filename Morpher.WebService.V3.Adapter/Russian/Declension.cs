@@ -16,10 +16,9 @@ namespace Morpher.WebService.V3.Russian.Adaptor
 
         public IParse Parse(string s, ParseArgs args = null)
         {
-            DeclensionFlags flags = ConvertToDeclensionFlags(args);
-            bool isAnimate = (flags & DeclensionFlags.Animate) == DeclensionFlags.Animate;
+            DeclensionFlags flags = ConvertToDeclensionFlags(args);            
             var parse = _client.Parse(s, flags);            
-            return new Parse(parse, isAnimate);
+            return new Parse(parse);
         }
         
         static private DeclensionFlags ConvertToDeclensionFlags(ParseArgs args)
@@ -76,13 +75,11 @@ namespace Morpher.WebService.V3.Russian.Adaptor
    
     class Parse : IParse
     {        
-        private readonly DeclensionResult _declensionResult;
-        private readonly bool _isAnimate;
+        private readonly DeclensionResult _declensionResult;        
 
-        public Parse(DeclensionResult declensionResult, bool isAnimate)
+        public Parse(DeclensionResult declensionResult)
         {
-            _declensionResult = declensionResult;
-            _isAnimate = isAnimate;
+            _declensionResult = declensionResult;            
         }               
 
         IParadigm IParse.Plural => new PluralParadigm(_declensionResult.Plural);     
@@ -107,8 +104,8 @@ namespace Morpher.WebService.V3.Russian.Adaptor
             }
         }
 
-        bool IParse.IsAnimate => _isAnimate;
-        string IParse.Paucal => null;
+        bool IParse.IsAnimate => throw new NotImplementedException();       
+        string IParse.Paucal => throw new NotImplementedException();
         string IParadigm.Locative => null;//maybe _declensionResult.Where?
         string ISlavicParadigm.Nominative => _declensionResult.Nominative;
         string ISlavicParadigm.Genitive => _declensionResult.Genitive;
