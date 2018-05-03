@@ -1,10 +1,10 @@
 ﻿using System;
 using NUnit.Framework;
 using Morpher.Ukrainian;
-using Morpher.WebService.V3.Ukrainian.Adapter;
+using Morpher.WebService.V3.Ukrainian.Adaptor;
 
 
-namespace Morpher.WebService.V3.Adapter.Test
+namespace Morpher.WebService.V3.Adaptor.Test
 {
     [TestFixture]
     public class Ukrainian

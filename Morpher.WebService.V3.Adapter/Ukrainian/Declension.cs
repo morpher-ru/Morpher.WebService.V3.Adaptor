@@ -1,7 +1,7 @@
 ﻿using System;
 using Morpher.Ukrainian;
 
-namespace Morpher.WebService.V3.Ukrainian.Adapter
+namespace Morpher.WebService.V3.Ukrainian.Adaptor
 {
     public class Declension : IDeclension
     {

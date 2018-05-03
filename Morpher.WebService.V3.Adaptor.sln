@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Morpher.WebService.V3.Adapter", "Morpher.WebService.V3.Adapter\Morpher.WebService.V3.Adapter.csproj", "{FE167697-E6EC-42E7-A1D3-E6259E62E627}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Morpher.WebService.V3.Adaptor", "Morpher.WebService.V3.Adapter\Morpher.WebService.V3.Adaptor.csproj", "{FE167697-E6EC-42E7-A1D3-E6259E62E627}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Morpher.WebService.V3.Adapter.Tests", "Morpher.WebService.V3.Adapter.Tests\Morpher.WebService.V3.Adapter.Tests.csproj", "{8DF506E5-4C4A-4AAB-AB99-AA05C8689340}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Morpher.WebService.V3.Adaptor.Tests", "Morpher.WebService.V3.Adapter.Tests\Morpher.WebService.V3.Adaptor.Tests.csproj", "{8DF506E5-4C4A-4AAB-AB99-AA05C8689340}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

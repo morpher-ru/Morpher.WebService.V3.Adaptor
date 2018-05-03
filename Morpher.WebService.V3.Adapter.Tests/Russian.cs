@@ -1,9 +1,9 @@
 ﻿using System;
 using NUnit.Framework;
 using Morpher.Russian;
-using Morpher.WebService.V3.Russian.Adapter;
+using Morpher.WebService.V3.Russian.Adaptor;
 
-namespace Morpher.WebService.V3.Adapter.Test
+namespace Morpher.WebService.V3.Adaptor.Test
 {    
 
     [TestFixture]
