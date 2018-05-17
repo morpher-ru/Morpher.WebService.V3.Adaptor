@@ -22,66 +22,11 @@ namespace Morpher.WebService.V3.Ukrainian.Adaptor
 
             var spellResult = _client.Spell(n, unit);
 
-            EUkrainianCase ukrainianCase = GetCase(@case.Get(new Paradigm()));
+            string [] result = @case.Get(new Paradigm(spellResult))
+                .Split(Paradigm.Separator);
 
-            string result;
-            switch (ukrainianCase)
-            {
-                case EUkrainianCase.Nominative:
-                    {
-                        result = spellResult.NumberDeclension.Nominative;
-                        unit = spellResult.UnitDeclension.Nominative;
-                    }
-                    break;
-                case EUkrainianCase.Genitive:
-                    {
-                        result = spellResult.NumberDeclension.Genitive;
-                        unit = spellResult.UnitDeclension.Genitive;
-                    }
-                    break;
-                case EUkrainianCase.Dative:
-                    {
-                        result = spellResult.NumberDeclension.Dative;
-                        unit = spellResult.UnitDeclension.Dative;
-                    }
-                    break;
-                case EUkrainianCase.Accusative:
-                    {
-                        result = spellResult.NumberDeclension.Accusative;
-                        unit = spellResult.UnitDeclension.Accusative;
-                    }
-                    break;
-                case EUkrainianCase.Instrumental:
-                    {
-                        result = spellResult.NumberDeclension.Instrumental;
-                        unit = spellResult.UnitDeclension.Instrumental;
-                    }
-                    break;
-                case EUkrainianCase.Prepositional:
-                    {
-                        result = spellResult.NumberDeclension.Prepositional;
-                        unit = spellResult.UnitDeclension.Prepositional;
-                    }
-                    break;
-                case EUkrainianCase.Vocative:
-                    {
-                        result = spellResult.NumberDeclension.Vocative;
-                        unit = spellResult.UnitDeclension.Vocative;
-                    }
-                    break;
-                default:
-                    {
-                        System.Diagnostics.Debug.Assert(false, "ukrainianCase");
-                        throw new NotImplementedException();
-                    }                    
-            };
-
-            return result;
-        }
-
-        static EUkrainianCase GetCase(string caseNumber)
-        {
-            return (EUkrainianCase)int.Parse(caseNumber);
+            unit = result[1];
+            return result[0];
         }
     }
 }
