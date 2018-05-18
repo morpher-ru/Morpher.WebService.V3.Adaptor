@@ -1,34 +1,25 @@
-﻿using Morpher.Russian;
+﻿using System;
+using Morpher.Russian;
 
 namespace Morpher.WebService.V3.Russian.Adaptor
-{
-    enum ERussianCase
+{  
+    class Paradigm : IParadigm
     {
-        Nominative, Genitive, Dative, Accusative, Instrumental, Prepositional, Locative
-    }
+        public const char Separator = '\uffff';
 
-    class SlavicParadigm : ISlavicParadigm
-    {
-        protected static string Convert(ERussianCase russianCase)
+        readonly NumberSpellingResult r;
+
+        public Paradigm(NumberSpellingResult r)
         {
-            return ((int)russianCase).ToString();
+            this.r = r;
         }
-
-        string ISlavicParadigm.Nominative => Convert(ERussianCase.Nominative);
-
-        string ISlavicParadigm.Genitive => Convert(ERussianCase.Genitive);
-
-        string ISlavicParadigm.Dative => Convert(ERussianCase.Dative);
-
-        string ISlavicParadigm.Accusative => Convert(ERussianCase.Accusative);
-
-        string ISlavicParadigm.Instrumental => Convert(ERussianCase.Instrumental);
-
-        string ISlavicParadigm.Prepositional => Convert(ERussianCase.Prepositional);
+                
+        public string Nominative => r.NumberDeclension.Nominative + Separator + r.UnitDeclension.Nominative;
+        public string Genitive => r.NumberDeclension.Genitive + Separator + r.UnitDeclension.Genitive;
+        public string Dative => r.NumberDeclension.Dative + Separator + r.UnitDeclension.Dative;
+        public string Accusative => r.NumberDeclension.Accusative + Separator + r.UnitDeclension.Accusative;
+        public string Instrumental => r.NumberDeclension.Instrumental + Separator + r.UnitDeclension.Instrumental;
+        public string Prepositional => r.NumberDeclension.Prepositional + Separator + r.UnitDeclension.Prepositional;
+        public string Locative => throw new NotImplementedException();
     }    
-
-    class Paradigm : SlavicParadigm, IParadigm
-    {
-        string IParadigm.Locative => Convert(ERussianCase.Locative);
-    }
 }
