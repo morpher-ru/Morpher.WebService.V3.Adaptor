@@ -6,13 +6,11 @@ namespace Morpher.WebService.V3.Ukrainian.Adaptor
 {
     public class NumberSpelling : INumberSpelling
     {
-        private MorpherClient _morpher;
-        private Client _client;
+        private readonly Client _client;
 
-        public NumberSpelling(Guid? token = null, string url = null)
+        public NumberSpelling(Client client)
         {
-            _morpher = new MorpherClient(token, url);
-            _client = _morpher.Ukrainian;
+            _client = client;
         }
 
         public string Spell(decimal n, ref string unit, ICase<IParadigm> @case)

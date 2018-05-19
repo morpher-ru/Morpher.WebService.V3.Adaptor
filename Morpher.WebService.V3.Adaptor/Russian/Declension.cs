@@ -5,13 +5,11 @@ namespace Morpher.WebService.V3.Russian.Adaptor
 {
     public class Declension : IDeclension
     {
-        private MorpherClient _morpher;
-        private Client _client;
+        private readonly Client _client;
 
-        public Declension(Guid? token = null, string url = null)
+        public Declension(Client client)
         {            
-            _morpher = new MorpherClient(token, url);
-            _client = _morpher.Russian;
+            _client = client;
         }
 
         public IParse Parse(string s, ParseArgs args = null)

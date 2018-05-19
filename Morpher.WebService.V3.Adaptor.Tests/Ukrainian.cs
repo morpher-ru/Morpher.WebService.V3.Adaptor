@@ -9,10 +9,12 @@ namespace Morpher.WebService.V3.Adaptor.Test
     [TestFixture]
     public class Ukrainian
     {
+        readonly MorpherClient _morpherClient = new MorpherClient();
+
         [Test]
         public void UkrainianDeclension()
         {            
-            var declension = new Declension();
+            var declension = new Declension(_morpherClient.Ukrainian);
 
             IParse parsedResult = declension.Parse("помідор");
             Assert.IsNotNull(parsedResult);
@@ -31,7 +33,7 @@ namespace Morpher.WebService.V3.Adaptor.Test
         [Test]
         public void UkrainianNumberSpelling()
         {
-            var numberSpelling = new NumberSpelling();
+            var numberSpelling = new NumberSpelling(_morpherClient.Ukrainian);
 
             AssertNumberSpelling(numberSpelling,
                 "один мільярд двісті тридцять чотири мільйони п'ятсот шістдесят сім тисяч вісімсот дев'яносто", "рублів", Case.Nominative);

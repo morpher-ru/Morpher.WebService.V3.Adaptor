@@ -9,10 +9,12 @@ namespace Morpher.WebService.V3.Adaptor.Test
     [TestFixture]
     public class Russian
     {
+        readonly MorpherClient _morpherClient = new MorpherClient();
+
         [Test]
         public void RussianDeclension()
         {            
-            var declension = new Declension();
+            var declension = new Declension(_morpherClient.Russian);
 
             IParse parsedResult = declension.Parse("помидор");
             Assert.IsNotNull(parsedResult);
@@ -42,7 +44,7 @@ namespace Morpher.WebService.V3.Adaptor.Test
         [Test]
         public void RussianNumberSpelling()
         {
-            var numberSpelling = new NumberSpelling();            
+            var numberSpelling = new NumberSpelling(_morpherClient.Russian);            
 
             AssertNumberSpelling(numberSpelling, 
                 "один миллиард двести тридцать четыре миллиона пятьсот шестьдесят семь тысяч восемьсот девяносто", "рублей", Case.Nominative);
