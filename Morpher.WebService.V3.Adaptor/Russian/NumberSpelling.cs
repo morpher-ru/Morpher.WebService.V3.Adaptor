@@ -1,5 +1,4 @@
-﻿using System;
-using Morpher.Russian;
+﻿using Morpher.Russian;
 
 
 namespace Morpher.WebService.V3.Russian.Adaptor

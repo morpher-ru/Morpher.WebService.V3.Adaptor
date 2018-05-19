@@ -1,5 +1,4 @@
-﻿using System;
-using Morpher.Ukrainian;
+﻿using Morpher.Ukrainian;
 
 namespace Morpher.WebService.V3.Ukrainian.Adaptor
 {

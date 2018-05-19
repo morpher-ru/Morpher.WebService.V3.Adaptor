@@ -1,5 +1,4 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Morpher.Ukrainian;
 using Morpher.WebService.V3.Ukrainian.Adaptor;
 
