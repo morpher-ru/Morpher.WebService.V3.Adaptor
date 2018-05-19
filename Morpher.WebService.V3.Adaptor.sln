@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Morpher.WebService.V3.Adaptor", "Morpher.WebService.V3.Adapter\Morpher.WebService.V3.Adaptor.csproj", "{FE167697-E6EC-42E7-A1D3-E6259E62E627}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Morpher.WebService.V3.Adaptor", "Morpher.WebService.V3.Adaptor\Morpher.WebService.V3.Adaptor.csproj", "{AD522C2F-E633-4C20-AF77-C7E367690AEC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Morpher.WebService.V3.Adaptor.Tests", "Morpher.WebService.V3.Adapter.Tests\Morpher.WebService.V3.Adaptor.Tests.csproj", "{8DF506E5-4C4A-4AAB-AB99-AA05C8689340}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Morpher.WebService.V3.Adaptor.Tests", "Morpher.WebService.V3.Adaptor.Tests\Morpher.WebService.V3.Adaptor.Tests.csproj", "{74B6E294-C161-4479-A97D-84CA25DE1D69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FE167697-E6EC-42E7-A1D3-E6259E62E627}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FE167697-E6EC-42E7-A1D3-E6259E62E627}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FE167697-E6EC-42E7-A1D3-E6259E62E627}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FE167697-E6EC-42E7-A1D3-E6259E62E627}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8DF506E5-4C4A-4AAB-AB99-AA05C8689340}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8DF506E5-4C4A-4AAB-AB99-AA05C8689340}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8DF506E5-4C4A-4AAB-AB99-AA05C8689340}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8DF506E5-4C4A-4AAB-AB99-AA05C8689340}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD522C2F-E633-4C20-AF77-C7E367690AEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD522C2F-E633-4C20-AF77-C7E367690AEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD522C2F-E633-4C20-AF77-C7E367690AEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD522C2F-E633-4C20-AF77-C7E367690AEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74B6E294-C161-4479-A97D-84CA25DE1D69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74B6E294-C161-4479-A97D-84CA25DE1D69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74B6E294-C161-4479-A97D-84CA25DE1D69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74B6E294-C161-4479-A97D-84CA25DE1D69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
