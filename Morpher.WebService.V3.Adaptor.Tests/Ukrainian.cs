@@ -1,19 +1,33 @@
-﻿using NUnit.Framework;
-using Morpher.Ukrainian;
-using Morpher.WebService.V3.Ukrainian.Adaptor;
-
-
-namespace Morpher.WebService.V3.Adaptor.Test
+﻿namespace Morpher.WebService.V3.Adaptor.Test
 {
+    using NUnit.Framework;
+    using Morpher.Ukrainian;
+    using Morpher.WebService.V3.Ukrainian.Adaptor;
+    using System.Collections.Specialized;
+    using Moq;
+
     [TestFixture]
     public class Ukrainian
     {
-        readonly MorpherClient _morpherClient = new MorpherClient();
+        const string DeclensionResultText = @"
+{
+    ""Р"": ""помідора"",
+    ""Д"": ""помідору"",
+    ""З"": ""помідора"",
+    ""О"": ""помідором"",
+    ""М"": ""помідорі"",
+    ""К"": ""помідоре""    
+}";
 
         [Test]
         public void UkrainianDeclension()
-        {            
-            var declension = new Declension(_morpherClient.Ukrainian);
+        {
+            var webClient = new Mock<IWebClient>();
+            webClient.Setup(client => client.QueryString).Returns(new NameValueCollection());
+            webClient.Setup(client => client.DownloadString(It.IsAny<string>())).Returns(DeclensionResultText);
+            var morpherClient = new MorpherClient(null, null, webClient.Object);
+
+            var declension = new Declension(morpherClient.Ukrainian);
 
             IParse parsedResult = declension.Parse("помідор");
             Assert.IsNotNull(parsedResult);
@@ -29,10 +43,37 @@ namespace Morpher.WebService.V3.Adaptor.Test
 
         const int n = 1234567890;
 
+        const string SpellText = @"
+{
+    ""n"": {
+        ""Н"": ""один мільярд двісті тридцять чотири мільйони п'ятсот шістдесят сім тисяч вісімсот дев'яносто"",
+        ""Р"": ""одного мільярда двохсот тридцяти чотирьох мільйонів п'ятисот шістдесяти семи тисяч восьмисот дев'яноста"",
+        ""Д"": ""одному мільярду двомстам тридцяти чотирьом мільйонам п'ятистам шістдесяти семи тисячам восьмистам дев'яноста"",
+        ""З"": ""один мільярд двісті тридцять чотири мільйони п'ятсот шістдесят сім тисяч вісімсот дев'яносто"",
+        ""О"": ""одним мільярдом двомастами тридцятьма чотирма мільйонами п'ятьмастами шістдесятьма сьома тисячами вісьмастами дев'яноста"",
+        ""М"": ""одному мільярді двохстах тридцяти чотирьох мільйонах п'ятистах шістдесяти семи тисячах восьмистах дев'яноста"",
+        ""К"": ""один мільярд двісті тридцять чотири мільйони п'ятсот шістдесят сім тисяч вісімсот дев'яносто""
+    },
+    ""unit"": {
+        ""Н"": ""рублів"",
+        ""Р"": ""рублів"",
+        ""Д"": ""рублям"",
+        ""З"": ""рублів"",
+        ""О"": ""рублями"",
+        ""М"": ""рублях"",
+        ""К"": ""рублів""
+    }
+}";
+
         [Test]
         public void UkrainianNumberSpelling()
         {
-            var numberSpelling = new NumberSpelling(_morpherClient.Ukrainian);
+            var webClient = new Mock<IWebClient>();
+            webClient.Setup(client => client.QueryString).Returns(new NameValueCollection());
+            webClient.Setup(client => client.DownloadString(It.IsAny<string>())).Returns(SpellText);
+            var morpherClient = new MorpherClient(null, null, webClient.Object);
+
+            var numberSpelling = new NumberSpelling(morpherClient.Ukrainian);
 
             AssertNumberSpelling(numberSpelling,
                 "один мільярд двісті тридцять чотири мільйони п'ятсот шістдесят сім тисяч вісімсот дев'яносто", "рублів", Case.Nominative);

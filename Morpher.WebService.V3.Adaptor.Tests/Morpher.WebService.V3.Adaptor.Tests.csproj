@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.0;net40</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
     <PackageId>Morpher.WebService.V3.Adaptor.Tests</PackageId>
     <Company></Company>
     <Product>Morpher.WebService.V3.Adaptor.Tests</Product>
@@ -8,14 +8,24 @@
     <Copyright>Copyright ©  2018</Copyright>
     
     <ProjectGuid>{74B6E294-C161-4479-A97D-84CA25DE1D69}</ProjectGuid>
+    
+    <ApplicationIcon />
+    
+    <OutputType>Library</OutputType>
+    
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.2" />
-    <PackageReference Include="Morpher.API" Version="1.0.9" />
-    <PackageReference Include="Morpher.WebService.V3.Client" Version="2.0.108" />
+    <PackageReference Include="Morpher.WebService.V3.Client" Version="3.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="NUnit" Version="3.10.1" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.10.0" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.0'">
+    <PackageReference Include="Moq">
+      <Version>4.10.0</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Morpher.WebService.V3.Adaptor\Morpher.WebService.V3.Adaptor.csproj" />
