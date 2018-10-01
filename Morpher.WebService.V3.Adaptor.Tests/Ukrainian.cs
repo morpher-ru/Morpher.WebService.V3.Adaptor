@@ -1,11 +1,11 @@
-﻿namespace Morpher.WebService.V3.Adaptor.Test
-{
-    using NUnit.Framework;
-    using Morpher.Ukrainian;
-    using Morpher.WebService.V3.Ukrainian.Adaptor;
-    using System.Collections.Specialized;
-    using Moq;
+﻿using NUnit.Framework;
+using Morpher.Ukrainian;
+using Morpher.WebService.V3.Ukrainian.Adaptor;
+using System.Collections.Specialized;
+using Moq;
 
+namespace Morpher.WebService.V3.Adaptor.Test
+{
     [TestFixture]
     public class Ukrainian
     {

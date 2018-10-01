@@ -1,12 +1,12 @@
-﻿namespace Morpher.WebService.V3.Adaptor.Test
-{
-    using System;
-    using NUnit.Framework;
-    using Morpher.Russian;
-    using Morpher.WebService.V3.Russian.Adaptor;
-    using System.Collections.Specialized;
-    using Moq;
+﻿using System;
+using NUnit.Framework;
+using Morpher.Russian;
+using Morpher.WebService.V3.Russian.Adaptor;
+using System.Collections.Specialized;
+using Moq;
 
+namespace Morpher.WebService.V3.Adaptor.Test
+{
     [TestFixture]
     public class Russian
     {
@@ -44,7 +44,7 @@
             Assert.AreEqual("помидору", parsedResult.Dative);
             Assert.AreEqual("помидор", parsedResult.Accusative);
             Assert.AreEqual("помидором", parsedResult.Instrumental);
-            Assert.AreEqual("помидоре", parsedResult.Prepositional);            
+            Assert.AreEqual("помидоре", parsedResult.Prepositional);
             Assert.IsNull(parsedResult.Locative);
 
             Assert.AreEqual("помидоры", parsedResult.Plural.Nominative);
