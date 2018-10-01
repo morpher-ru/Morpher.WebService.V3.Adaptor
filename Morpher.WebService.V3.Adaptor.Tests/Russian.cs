@@ -10,7 +10,7 @@
     [TestFixture]
     public class Russian
     {
-        string DeclensionResultText { get; } = @"
+        const string DeclensionResultText = @"
 {
     ""Р"": ""помидора"",
     ""Д"": ""помидору"",
@@ -62,7 +62,7 @@
 
         const int n = 1234567890;
 
-        string SpellResultText { get; } = @"
+        const string SpellResultText = @"
 {
     ""n"": {
         ""И"": ""один миллиард двести тридцать четыре миллиона пятьсот шестьдесят семь тысяч восемьсот девяносто"",
