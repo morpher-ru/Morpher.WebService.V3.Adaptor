@@ -39,6 +39,9 @@ namespace Morpher.WebService.V3.Adaptor.Test
             Assert.AreEqual("помідорі", parsedResult.Prepositional);
             Assert.AreEqual("помідоре", parsedResult.Vocative);
             Assert.IsNull(parsedResult.Gender);
+
+            webClient.Verify(client => client.QueryString, Times.AtLeastOnce());
+            webClient.Verify(client => client.DownloadString(It.IsAny<string>()), Times.Once());
         }
 
         const int n = 1234567890;
@@ -99,6 +102,9 @@ namespace Morpher.WebService.V3.Adaptor.Test
             
             string nullUnit = null;
             Assert.IsNull(numberSpelling.Spell(1, ref nullUnit, Case.Prepositional));
+
+            webClient.Verify(client => client.QueryString);
+            webClient.Verify(client => client.DownloadString(It.IsAny<string>()));
         }
 
         public void AssertNumberSpelling(NumberSpelling numberSpelling, string correctNumber, string correctUnit, Case @case)

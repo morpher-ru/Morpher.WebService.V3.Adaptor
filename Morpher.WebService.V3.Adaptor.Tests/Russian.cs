@@ -57,7 +57,10 @@ namespace Morpher.WebService.V3.Adaptor.Test
             Assert.IsNull(parsedResult.Gender);
             
             Assert.Throws<NotImplementedException>(() => { var fail = parsedResult.IsAnimate; } );
-            Assert.Throws<NotImplementedException>(() => { var fail = parsedResult.Paucal; });            
+            Assert.Throws<NotImplementedException>(() => { var fail = parsedResult.Paucal; });
+
+            webClient.Verify(client => client.QueryString, Times.AtLeastOnce());
+            webClient.Verify(client => client.DownloadString(It.IsAny<string>()), Times.Once());
         }
 
         const int n = 1234567890;
@@ -97,8 +100,8 @@ namespace Morpher.WebService.V3.Adaptor.Test
 
             AssertNumberSpelling(numberSpelling,
                 "одного миллиарда двухсот тридцати четырёх миллионов пятисот шестидесяти семи тысяч восьмисот девяноста", "рублей", Case.Genitive);
-                
-            AssertNumberSpelling(numberSpelling,
+
+             AssertNumberSpelling(numberSpelling,
                 "одному миллиарду двумстам тридцати четырём миллионам пятистам шестидесяти семи тысячам восьмистам девяноста", "рублям", Case.Dative);
                 
             AssertNumberSpelling(numberSpelling,
@@ -119,6 +122,9 @@ namespace Morpher.WebService.V3.Adaptor.Test
             
             string nullUnit = null;            
             Assert.IsNull(numberSpelling.Spell(1, ref nullUnit, Case.Prepositional));
+
+            webClient.Verify(client => client.QueryString);
+            webClient.Verify(client => client.DownloadString(It.IsAny<string>()));
         }
 
         public void AssertNumberSpelling(NumberSpelling numberSpelling, string correctNumber, string correctUnit, Case @case)
