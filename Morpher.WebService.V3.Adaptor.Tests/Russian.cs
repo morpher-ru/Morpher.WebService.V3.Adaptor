@@ -2,19 +2,40 @@
 using NUnit.Framework;
 using Morpher.Russian;
 using Morpher.WebService.V3.Russian.Adaptor;
+using System.Collections.Specialized;
+using Moq;
 
 namespace Morpher.WebService.V3.Adaptor.Test
-{    
-
+{
     [TestFixture]
     public class Russian
     {
-        readonly MorpherClient _morpherClient = new MorpherClient();
+        const string DeclensionResultText = @"
+{
+    ""Р"": ""помидора"",
+    ""Д"": ""помидору"",
+    ""В"": ""помидор"",
+    ""Т"": ""помидором"",
+    ""П"": ""помидоре"",    
+    ""множественное"": {
+        ""И"": ""помидоры"",
+        ""Р"": ""помидоров"",
+        ""Д"": ""помидорам"",
+        ""В"": ""помидоры"",
+        ""Т"": ""помидорами"",
+        ""П"": ""помидорах"",        
+    }
+}";
 
         [Test]
         public void RussianDeclension()
-        {            
-            var declension = new Declension(_morpherClient.Russian);
+        {
+            var webClient = new Mock<IWebClient>();
+            webClient.Setup(client => client.QueryString).Returns(new NameValueCollection());
+            webClient.Setup(client => client.DownloadString(It.IsAny<string>())).Returns(DeclensionResultText);
+            var morpherClient = new MorpherClient(null, null, webClient.Object);
+
+            var declension = new Declension(morpherClient.Russian);
 
             IParse parsedResult = declension.Parse("помидор");
             Assert.IsNotNull(parsedResult);
@@ -36,23 +57,51 @@ namespace Morpher.WebService.V3.Adaptor.Test
             Assert.IsNull(parsedResult.Gender);
             
             Assert.Throws<NotImplementedException>(() => { var fail = parsedResult.IsAnimate; } );
-            Assert.Throws<NotImplementedException>(() => { var fail = parsedResult.Paucal; });            
+            Assert.Throws<NotImplementedException>(() => { var fail = parsedResult.Paucal; });
+
+            webClient.Verify(client => client.QueryString, Times.AtLeastOnce());
+            webClient.Verify(client => client.DownloadString(It.IsAny<string>()), Times.Once());
         }
 
         const int n = 1234567890;
 
+        const string SpellResultText = @"
+{
+    ""n"": {
+        ""И"": ""один миллиард двести тридцать четыре миллиона пятьсот шестьдесят семь тысяч восемьсот девяносто"",
+        ""Р"": ""одного миллиарда двухсот тридцати четырёх миллионов пятисот шестидесяти семи тысяч восьмисот девяноста"",
+        ""Д"": ""одному миллиарду двумстам тридцати четырём миллионам пятистам шестидесяти семи тысячам восьмистам девяноста"",
+        ""В"": ""один миллиард двести тридцать четыре миллиона пятьсот шестьдесят семь тысяч восемьсот девяносто"",
+        ""Т"": ""одним миллиардом двумястами тридцатью четырьмя миллионами пятьюстами шестьюдесятью семью тысячами восьмьюстами девяноста"",
+        ""П"": ""одном миллиарде двухстах тридцати четырёх миллионах пятистах шестидесяти семи тысячах восьмистах девяноста""
+    },
+    ""unit"": {
+        ""И"": ""рублей"",
+        ""Р"": ""рублей"",
+        ""Д"": ""рублям"",
+        ""В"": ""рублей"",
+        ""Т"": ""рублями"",
+        ""П"": ""рублях""
+    }
+}";
+
         [Test]
         public void RussianNumberSpelling()
         {
-            var numberSpelling = new NumberSpelling(_morpherClient.Russian);            
+            var webClient = new Mock<IWebClient>();
+            webClient.Setup(client => client.QueryString).Returns(new NameValueCollection());
+            webClient.Setup(client => client.DownloadString(It.IsAny<string>())).Returns(SpellResultText);
+            var morpherClient = new MorpherClient(null, null, webClient.Object);
+
+            var numberSpelling = new NumberSpelling(morpherClient.Russian);            
 
             AssertNumberSpelling(numberSpelling, 
                 "один миллиард двести тридцать четыре миллиона пятьсот шестьдесят семь тысяч восемьсот девяносто", "рублей", Case.Nominative);
 
             AssertNumberSpelling(numberSpelling,
                 "одного миллиарда двухсот тридцати четырёх миллионов пятисот шестидесяти семи тысяч восьмисот девяноста", "рублей", Case.Genitive);
-                
-            AssertNumberSpelling(numberSpelling,
+
+             AssertNumberSpelling(numberSpelling,
                 "одному миллиарду двумстам тридцати четырём миллионам пятистам шестидесяти семи тысячам восьмистам девяноста", "рублям", Case.Dative);
                 
             AssertNumberSpelling(numberSpelling,
@@ -73,6 +122,9 @@ namespace Morpher.WebService.V3.Adaptor.Test
             
             string nullUnit = null;            
             Assert.IsNull(numberSpelling.Spell(1, ref nullUnit, Case.Prepositional));
+
+            webClient.Verify(client => client.QueryString);
+            webClient.Verify(client => client.DownloadString(It.IsAny<string>()));
         }
 
         public void AssertNumberSpelling(NumberSpelling numberSpelling, string correctNumber, string correctUnit, Case @case)
