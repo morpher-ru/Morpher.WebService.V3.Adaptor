@@ -2,10 +2,10 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net40</TargetFrameworks>
     <PackageId>Morpher.WebService.V3.Adaptor</PackageId>
-    <Company></Company>
+    <Authors>morpher</Authors>
     <Product>Morpher.WebService.V3.Adaptor</Product>
-    <Description></Description>
-    <Copyright>Copyright ©  2018</Copyright>
+    <Description>A Morpher.API adaptor for Morpher.WebService.V3.Client.</Description>
+    <Copyright>Copyright © 2018-2021 morpher.ru</Copyright>
 
     <PackageVersion>1.0.0</PackageVersion>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
